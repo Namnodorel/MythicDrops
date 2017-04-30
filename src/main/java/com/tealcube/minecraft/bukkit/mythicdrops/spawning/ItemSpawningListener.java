@@ -52,6 +52,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -60,7 +61,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 public final class ItemSpawningListener implements Listener {
@@ -262,6 +265,31 @@ public final class ItemSpawningListener implements Listener {
     }
   }
 
+  @EventHandler
+  private void onItemDrop(PlayerDropItemEvent e) {
+    Item item = e.getItemDrop();
+    ItemStack is = item.getItemStack();
+    boolean applyNameplate = false;
+    if (is == null || is.getType() == Material.AIR || !is.hasItemMeta()) {
+      return;
+    }
+    if (CustomItemUtil.getCustomItemFromItemStack(is) != null) {
+      applyNameplate = true;
+    } else if (TierUtil.getTierFromItemStack(is) != null) {
+      applyNameplate = true;
+    }else if (SocketGemUtil.getSocketGemFromItemStack(is) != null) {
+      applyNameplate = true;
+    } else if (is.isSimilar(new IdentityTome())) {
+      applyNameplate = true;
+    } else if (is.isSimilar(new UnidentifiedItem(is.getType()))) {
+      applyNameplate = true;
+    }
+    if (applyNameplate) {
+      item.setCustomNameVisible(true);
+      item.setCustomName(e.getItemDrop().getItemStack().getItemMeta().getDisplayName());
+    }
+  }
+
   private void handleEntityDyingWithoutGive(EntityDeathEvent event) {
     // Start off with the random item chance. If the mob doesn't pass that, it gets no items.
     double chanceToGetDrop = mythicDrops.getConfigSettings().getItemChance() * mythicDrops
@@ -386,7 +414,9 @@ public final class ItemSpawningListener implements Listener {
       }
       World w = event.getEntity().getWorld();
       Location l = event.getEntity().getLocation();
-      w.dropItemNaturally(l, itemStack);
+      Entity itemEntity = w.dropItemNaturally(l, itemStack);
+      itemEntity.setCustomNameVisible(true);
+      itemEntity.setCustomName(itemStack.getItemMeta().getDisplayName());
     }
   }
 
