@@ -73,13 +73,13 @@ public final class MythicTierBuilder {
   }
 
   public MythicTierBuilder withBaseEnchantments(Set<MythicEnchantment> baseEnchantments) {
-    mythicTier.setBaseEnchantments(baseEnchantments != null ? baseEnchantments : new HashSet<MythicEnchantment>());
+    mythicTier.setBaseEnchantments(baseEnchantments != null ? baseEnchantments : new HashSet<>());
     return this;
   }
 
   public MythicTierBuilder withBonusEnchantments(Set<MythicEnchantment> bonusEnchantments) {
     mythicTier
-        .setBonusEnchantments(bonusEnchantments != null ? bonusEnchantments : new HashSet<MythicEnchantment>());
+        .setBonusEnchantments(bonusEnchantments != null ? bonusEnchantments : new HashSet<>());
     return this;
   }
 
