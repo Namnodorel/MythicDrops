@@ -98,7 +98,7 @@ public class MythicTome extends MythicItemStack {
     /**
      * Represents the {@link Material#WRITABLE_BOOK}
      */
-    BOOK_AND_QUILL(Material.WRITABLE_BOOK),
+    BOOK_AND_QUILL(Material.WRITTEN_BOOK),
     /**
      * Represents the {@link Material#ENCHANTED_BOOK}
      */
