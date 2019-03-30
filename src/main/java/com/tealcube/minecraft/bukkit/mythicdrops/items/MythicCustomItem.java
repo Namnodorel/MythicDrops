@@ -22,21 +22,20 @@
  */
 package com.tealcube.minecraft.bukkit.mythicdrops.items;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.tealcube.minecraft.bukkit.mythicdrops.api.enchantments.MythicEnchantment;
 import com.tealcube.minecraft.bukkit.mythicdrops.api.items.CustomItem;
 import com.tealcube.minecraft.bukkit.mythicdrops.api.items.MythicItemStack;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.RandomRangeUtil;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 public final class MythicCustomItem implements CustomItem {
 
@@ -181,19 +180,19 @@ public final class MythicCustomItem implements CustomItem {
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("name", name)
-        .add("chanceToBeGivenToAMonster", chanceToBeGivenToAMonster)
-        .add("chanceToDropOnDeath", chanceToDropOnDeath)
-        .add("displayName", displayName)
-        .add("enchantments", enchantments)
-        .add("lore", lore)
-        .add("material", material)
-        .add("broadcastOnFind", broadcastOnFind)
-        .add("durability", durability)
-        .add("unbreakable", unbreakable)
-        .add("hasDurability", hasDurability)
-        .toString();
+    return "MythicCustomItem{" +
+            "name='" + name + '\'' +
+            ", chanceToBeGivenToAMonster=" + chanceToBeGivenToAMonster +
+            ", chanceToDropOnDeath=" + chanceToDropOnDeath +
+            ", displayName='" + displayName + '\'' +
+            ", enchantments=" + enchantments +
+            ", lore=" + lore +
+            ", material=" + material +
+            ", broadcastOnFind=" + broadcastOnFind +
+            ", durability=" + durability +
+            ", unbreakable=" + unbreakable +
+            ", hasDurability=" + hasDurability +
+            '}';
   }
 
   @Override

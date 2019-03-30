@@ -22,7 +22,6 @@
  */
 package com.tealcube.minecraft.bukkit.mythicdrops.socketting;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.tealcube.minecraft.bukkit.mythicdrops.api.socketting.EffectTarget;
 import com.tealcube.minecraft.bukkit.mythicdrops.api.socketting.SocketEffect;
@@ -123,16 +122,16 @@ public final class SocketPotionEffect implements SocketEffect {
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("potionEffectType", potionEffectType)
-        .add("intensity", intensity)
-        .add("duration", duration)
-        .add("radius", radius)
-        .add("chanceToTrigger", chanceToTrigger)
-        .add("effectTarget", effectTarget)
-        .add("affectsWielder", affectsWielder)
-        .add("affectsTarget", affectsTarget)
-        .toString();
+    return "SocketPotionEffect{" +
+            "potionEffectType=" + potionEffectType +
+            ", intensity=" + intensity +
+            ", duration=" + duration +
+            ", radius=" + radius +
+            ", chanceToTrigger=" + chanceToTrigger +
+            ", effectTarget=" + effectTarget +
+            ", affectsWielder=" + affectsWielder +
+            ", affectsTarget=" + affectsTarget +
+            '}';
   }
 
   @Override
