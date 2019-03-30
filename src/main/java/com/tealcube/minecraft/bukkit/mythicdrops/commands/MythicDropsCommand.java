@@ -36,38 +36,20 @@ import com.tealcube.minecraft.bukkit.mythicdrops.logging.MythicLoggerFactory;
 import com.tealcube.minecraft.bukkit.mythicdrops.socketting.SocketGem;
 import com.tealcube.minecraft.bukkit.mythicdrops.socketting.SocketItem;
 import com.tealcube.minecraft.bukkit.mythicdrops.tiers.TierMap;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.EntityUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.GsonUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.ItemStackUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.ItemUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.SocketGemUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.StringListUtil;
-import com.tealcube.minecraft.bukkit.mythicdrops.utils.TierUtil;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import com.tealcube.minecraft.bukkit.mythicdrops.utils.*;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import se.ranzdo.bukkit.methodcommand.Arg;
-import se.ranzdo.bukkit.methodcommand.Command;
-import se.ranzdo.bukkit.methodcommand.FlagArg;
-import se.ranzdo.bukkit.methodcommand.Flags;
-import se.ranzdo.bukkit.methodcommand.Wildcard;
+import se.ranzdo.bukkit.methodcommand.*;
+
+import java.util.*;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public final class MythicDropsCommand {
 
@@ -474,10 +456,8 @@ public final class MythicDropsCommand {
         if (itemStack == null) {
           continue;
         }
-        if (!hasDurability && itemStack.getItemMeta() instanceof Damageable) {
-          ((Damageable) itemStack.getItemMeta())
-              .setDamage(ItemStackUtil.getDurabilityForMaterial(itemStack.getType(), minDura,
-                  maxDura));
+        if (!hasDurability) {
+          itemStack.setDurability((short)ItemStackUtil.getDurabilityForMaterial(itemStack.getType(), minDura, maxDura));
         }
         player.getInventory().addItem(itemStack);
         amountGiven++;

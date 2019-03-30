@@ -23,12 +23,12 @@
 package com.tealcube.minecraft.bukkit.mythicdrops.utils;
 
 import com.google.common.base.Preconditions;
-import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Map;
 
 public final class ItemStackUtil {
 
@@ -72,12 +72,7 @@ public final class ItemStackUtil {
 
   public static ItemStack setDurabilityForItemStack(ItemStack itemStack, double minDurability, double maxDurability) {
     Preconditions.checkNotNull(itemStack);
-    if (itemStack.getItemMeta() instanceof Damageable) {
-      ItemMeta itemMeta = itemStack.getItemMeta();
-      ((Damageable) itemMeta)
-          .setDamage(getDurabilityForMaterial(itemStack.getType(), minDurability, maxDurability));
-      itemStack.setItemMeta(itemMeta);
-    }
+    itemStack.setDurability((short)getDurabilityForMaterial(itemStack.getType(), minDurability, maxDurability));
     return itemStack;
   }
 
